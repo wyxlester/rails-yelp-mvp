@@ -1,0 +1,33 @@
+<h1>Show Selected Restaurants</h1>
+
+<p>Name: <%= @restaurant.name %></p>
+<p>Address: <%= @restaurant.address %></p>
+<p>Phone Number: <%= @restaurant.phone_number %></p>
+<p>Category: <%= @restaurant.category %></p>
+<br>
+<%= link_to "Back to Homepage", restaurants_path%>
+<br>
+<h2>Reviews for this restaurant</h2>
+
+<br>
+ <div class="list-group">
+  <% @restaurant.reviews.each do |review| %>
+    <li class="list-group-item">
+      <small>
+        <% count = 0 %>
+        <% 5.times do %>
+          <% if review.rating > count %>
+            <i class="fa-solid fa-star"></i>
+          <% else %>
+            <i class="fa-regular fa-star"></i>
+          <% end %>
+          <% count += 1 %>
+        <% end %>
+      </small>
+      <p><%= review.content %>, <%= review.rating %></p>
+    </li>
+  <% end %>
+  </div>
+<br>
+
+<%= link_to "Review Restaurant", new_restaurant_review_path(@restaurant)%>
